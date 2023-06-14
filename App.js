@@ -1,78 +1,41 @@
-import React from "react";
-import { StatusBar } from "expo-status-bar";
-import {
-  ImageBackground,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, View, ImageBackground } from "react-native";
+import { RegistrationScreen } from "./Screens/RegistrationScreen";
+import { LoginScreen } from "./Screens/LoginScreen";
+import { useFonts } from 'expo-font';
 
 export default function App() {
+  const [fontsLoaded] = useFonts({
+    "Roboto-Regular": require("./assets/fonts/Roboto-Regular.ttf"),
+    "Roboto-Medium": require("./assets/fonts/Roboto-Medium.ttf"),
+    "Roboto-Bold": require("./assets/fonts/Roboto-Bold.ttf"),
+    "Inter-Medium": require("./assets/fonts/Inter-Medium.ttf"),
+  });
+  if (!fontsLoaded) {
+    return null;
+  }
   return (
     <View style={styles.container}>
-      <ImageBackground style={styles.image} source={require("./bg.jpg")}>
-        <View style={styles.form}>
-          <ImageBackground style={styles.im}>
-          <View>
-            <TextInput style={styles.input} textAlign="center" />
-          </View>
-          <View style={{ marginTop: 16 }}>
-            <TextInput style={styles.input} textAlign="center" />
-          </View>
-          <View style={{ marginTop: 16 }}>
-            <TextInput
-              style={styles.input}
-              textAlign="center"
-              secureTextEntry={true}
-            />
-          </View>
-          <TouchableOpacity style={styles.btn}>
-            <Text style={styles.btnTitle}>Зареєструватися</Text>
-            </TouchableOpacity>
-            </ImageBackground>
-        </View>
+     
+      <ImageBackground
+        style={styles.image}
+        source={require("./bg.jpg")}
+      >
+        <RegistrationScreen />
+        {/* <LoginScreen/> */}
       </ImageBackground>
     </View>
   );
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
+    
   },
   image: {
     flex: 1,
     resizeMode: "cover",
-    justifyContent: "center",
-    textAlign: "center",
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: "#E8E8E8",
-    height: 40,
-    borderRadius: 8,
-    backgroundColor: '#F6F6F6',
-    color: "#f0f8ff",
-  },
-  form: {
-    marginHorizontal: 40,
-  },
-  btn: {
-    backgroundColor: "#FF6C00",
-    height: 51,
-    borderRadius: 100,
-    marginTop: 43,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  btnTitle: {
-    color: "#FFFFFF",
-    fontSize: 16,
-  },
-  im: {
-backgroundColor: "#FFFFFF",
+    
   },
 });
