@@ -9,6 +9,7 @@ import {
   Platform,
   Keyboard,
   TouchableWithoutFeedback,
+  Button,
 } from "react-native";
 
 const initialState = {
@@ -17,16 +18,16 @@ const initialState = {
   password: "",
 };
 
-export const RegistrationScreen = () => {
+export const RegistrationScreen = ({ navigation }) => {
   const [isShowKeyboard, setisShowKeyboard] = useState(false);
-    const [state, setState] = useState(initialState);
-    
+  const [state, setState] = useState(initialState);
+
   const keyboardHide = () => {
     setisShowKeyboard(false);
-      Keyboard.dismiss();
-      setState(initialState);
+    Keyboard.dismiss();
+    setState(initialState);
   };
- 
+
   return (
     <TouchableWithoutFeedback onPress={keyboardHide}>
       <View style={styles.container}>
@@ -49,37 +50,37 @@ export const RegistrationScreen = () => {
               <TextInput
                 style={styles.input}
                 placeholder="Login"
-           value={state.login}
+                value={state.login}
                 onChangeText={(value) =>
                   setState((prevState) => ({ ...prevState, login: value }))
                 }
-                              onFocus={() => setisShowKeyboard(true)}
-                            onSubmitEditing={keyboardHide}  
+                onFocus={() => setisShowKeyboard(true)}
+                onSubmitEditing={keyboardHide}
               ></TextInput>
             </View>
             <View style={{ marginTop: 16 }}>
               <TextInput
                 style={styles.input}
-                              placeholder="Email"
-                        value={state.email}
+                placeholder="Email"
+                value={state.email}
                 onChangeText={(value) =>
                   setState((prevState) => ({ ...prevState, email: value }))
-                }      
-                              onFocus={() => setisShowKeyboard(true)}
-                      onSubmitEditing={keyboardHide}        
+                }
+                onFocus={() => setisShowKeyboard(true)}
+                onSubmitEditing={keyboardHide}
               ></TextInput>
             </View>
             <View style={{ marginTop: 16 }}>
               <TextInput
                 style={styles.input}
-                              placeholder="Password"
-                              value={state.password}
+                placeholder="Password"
+                value={state.password}
                 onChangeText={(value) =>
                   setState((prevState) => ({ ...prevState, password: value }))
                 }
                 secureTextEntry={true}
-                              onFocus={() => setisShowKeyboard(true)}
-                              onSubmitEditing={keyboardHide}
+                onFocus={() => setisShowKeyboard(true)}
+                onSubmitEditing={keyboardHide}
               ></TextInput>
             </View>
             <TouchableOpacity
@@ -89,7 +90,12 @@ export const RegistrationScreen = () => {
             >
               <Text style={styles.textbtn}>Зареєструватися</Text>
             </TouchableOpacity>
-            <Text style={styles.minitext}>Вже є акаунт? Увійти</Text>
+            <Text
+              onPress={() => navigation.navigate("Login")}
+              style={styles.minitext}
+            >
+              Вже є акаунт? Увійти
+            </Text>
           </View>
         </KeyboardAvoidingView>
       </View>
@@ -102,8 +108,8 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     flex: 1,
   },
-    form: {
-      position: "relative",
+  form: {
+    position: "relative",
     minHeight: 549,
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
@@ -112,7 +118,7 @@ const styles = StyleSheet.create({
   caption: {
     textAlign: "center",
     marginTop: 92,
-      fontSize: 30,
+    fontSize: 30,
     fontFamily: "Roboto-Medium",
   },
   input: {
@@ -121,7 +127,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#F6F6F6",
     height: 50,
     borderRadius: 6,
-      fontSize: 18,
+    fontSize: 18,
     fontFamily: "Roboto-Regular",
     marginHorizontal: 16,
     padding: 16,
@@ -138,16 +144,16 @@ const styles = StyleSheet.create({
   },
   textbtn: {
     color: "#FFFFFF",
-      fontSize: 16,
+    fontSize: 16,
     fontFamily: "Roboto-Regular",
   },
   minitext: {
-      fontSize: 16,
-      fontFamily: "Roboto-Regular",
+    fontSize: 16,
+    fontFamily: "Roboto-Regular",
     color: "#1B4371",
     textAlign: "center",
     marginTop: 16,
-    },
+  },
   userImage: {
     position: "absolute",
     top: -60,

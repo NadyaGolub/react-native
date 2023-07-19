@@ -9,13 +9,15 @@ import {
   Platform,
   Keyboard,
   TouchableWithoutFeedback,
+  Button
 } from "react-native";
+
 
 const initialState = {
   email: "",
   password: "",
 };
-export const LoginScreen = () => {
+export const LoginScreen = ({navigation}) => {
   const [isShowKeyboard, setisShowKeyboard] = useState(false);
   const [state, setState] = useState(initialState);
 
@@ -71,7 +73,7 @@ export const LoginScreen = () => {
             >
               <Text style={styles.textbtn}>Увійти</Text>
             </TouchableOpacity>
-            <Text style={styles.minitext}>Немає акаунта? Зареєструватися</Text>
+            <Text onPress={()=> navigation.navigate("Register")}  style={styles.minitext}>Немає акаунта? Зареєструватися</Text>
           </View>
         </KeyboardAvoidingView>
       </View>
